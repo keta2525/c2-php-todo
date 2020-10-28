@@ -12,7 +12,7 @@ class TodoTableSeeder extends Seeder
     public function run()
     {   
         for($i = 1; $i <= 10; $i++){
-            DB::table('user')->insert([
+            DB::table('users')->insert([
                 'name' => "ユーザー$i",
                 'email' => "hoge+$i@test.com",
                 'password' => bcrypt('password'),
