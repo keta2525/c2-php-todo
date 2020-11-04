@@ -1,20 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * Todo一覧を取得
-     * @return \Illuminate\Http\Response
-     */
+    private const PAGE_SIZE = 10;
     public function index()
     {
-        $todo_list = Todo::paginate(5);
+        $todo_list = Auth::user()->todos()->paginate(self::PAGE_SIZE);
         return view('todo/index', compact('todo_list'));
     }
 
@@ -27,7 +23,6 @@ class TodoController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +33,6 @@ class TodoController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      * Todo単体を取得
@@ -47,9 +41,10 @@ class TodoController extends Controller
      */
     public function show(int $id)
     {
-        return view('todo/show', ['todo' => Todo::findOrFail($id)]);
+        //return view('todo/show', ['todo' => Todo::findOrFail($id)]);
+        $todo = Auth::user()->todos()->findOrFail($id);
+        return view('todo/show', compact('todo'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,7 +55,6 @@ class TodoController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -72,7 +66,6 @@ class TodoController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
