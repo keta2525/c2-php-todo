@@ -20,12 +20,14 @@
             <tr>
                 <th>タイトル</th>
                 <th>期限</th>
+                <th>状態</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td  style="width: 300px">{{ $todo->title }}</td>
                 <td>{{ $todo->due_date }}</td>
+                <td>{{ $todo->getStatusText() }}</td>
             </tr>
             </tbody>
         </table>
@@ -44,4 +46,4 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 </script>
 </body>
-</htm
+</html>
